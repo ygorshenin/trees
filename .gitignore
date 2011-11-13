@@ -1,0 +1,9 @@
+# Object files and binaries
+obj/*
+bin/*
+
+# Debug info
+*.gch
+
+# Emacs backup files
+*~
