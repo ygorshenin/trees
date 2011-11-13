@@ -13,7 +13,7 @@ HDRS = $(wildcard $(addsuffix /*.h, $(SRC_DIRS)))
 
 OBJ_DIR = obj
 OBJ_DIRS = $(addprefix $(OBJ_DIR)/, $(SRC_SUBDIRS))
-OBJS := $(patsubst %(SRC_DIR)/%, $(OBJ_DIR)/%, $(SRCS))
+OBJS := $(patsubst $(SRC_DIR)/%, $(OBJ_DIR)/%, $(SRCS))
 OBJS := $(patsubst %.cc, %.o, $(OBJS))
 
 BIN_DIR = bin
@@ -27,7 +27,7 @@ $(PROGRAM): $(OBJS)
 	$(CPP) $(LDFLAGS) -o $@ $^
 
 $(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
+	mkdir -p $(OBJ_DIRS)
 
 $(BIN_DIR):
 	mkdir -p $(BIN_DIR)
