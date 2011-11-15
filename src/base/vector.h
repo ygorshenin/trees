@@ -1,5 +1,5 @@
-#ifndef BASE_VECTOR_H
-#define BASE_VECTOR_H
+#ifndef BASE_VECTOR_H_
+#define BASE_VECTOR_H_
 
 
 namespace base {
@@ -21,4 +21,4 @@ class Vector {
 
 }  // namespace base
 
-#endif // #ifndef BASE_VECTOR_H
+#endif // BASE_VECTOR_H_

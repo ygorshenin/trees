@@ -1,12 +1,12 @@
 CPP = g++
-CPPFLAGS = -O2 -Wall -pedantic -I$(SRC_DIR) -I $(BOOST_ROOT)
+CPPFLAGS = -O2 -Wall -I$(SRC_DIR) -I $(BOOST_ROOT)
 BOOST_LIBS_ROOT = /usr/local/lib
-BOOST_LIBS = program_options
+BOOST_LIBS = chrono program_options system
 LDFLAGS = $(addprefix $(BOOST_LIBS_ROOT)/, \
 		$(addsuffix .a, $(addprefix libboost_, $(BOOST_LIBS))))
 
 SRC_DIR = src
-SRC_SUBDIRS = . base
+SRC_SUBDIRS = . base containers generators
 SRC_DIRS = $(addprefix $(SRC_DIR)/, $(SRC_SUBDIRS))
 SRCS = $(wildcard $(addsuffix /*.cc, $(SRC_DIRS)))
 HDRS = $(wildcard $(addsuffix /*.h, $(SRC_DIRS)))
