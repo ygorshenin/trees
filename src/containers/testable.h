@@ -24,7 +24,7 @@ class TestableInterface : public boost::noncopyable {
     Derived* AsDerived() {
       return static_cast<Derived*>(this);
     }
-};  // class TestableInterface
+}; // class TestableInterface
 
 }  // namespace containers
 

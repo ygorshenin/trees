@@ -24,7 +24,7 @@ class TestableStlSet : public TestableInterface<T, TestableStlSet<T> > {
 
   private:
     std::set<T> set_;
-};  // class TestableStlSet
+}; // class TestableStlSet
 
 }  // namespace containers
 
