@@ -12,6 +12,8 @@
 #include "boost/scoped_array.hpp"
 #include "containers/testable.h"
 #include "containers/testable_stl_set.h"
+#include "typelist/macros.h"
+#include "typelist/typelist.h"
 
 namespace po = boost::program_options;
 using std::clog;
