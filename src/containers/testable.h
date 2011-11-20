@@ -12,6 +12,9 @@ namespace containers {
 template<typename T, typename Derived>
 class TestableInterface : public boost::noncopyable {
   public:
+    virtual ~TestableInterface() {
+    }
+
     void Assign(size_t n, const T* data) {
       AsDerived()->Assign(n, data);
     }
