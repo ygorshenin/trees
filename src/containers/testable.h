@@ -9,10 +9,10 @@
 namespace containers {
 
 // CRTP idiom is used here, to avoid inline functions overhead.
-template<class T, class Derived>
+template<typename T, typename Derived>
 class TestableInterface : public boost::noncopyable {
   public:
-    void Assign(size_t n, const T *data) {
+    void Assign(size_t n, const T* data) {
       AsDerived()->Assign(n, data);
     }
 
