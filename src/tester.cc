@@ -16,6 +16,7 @@
 #include "boost/scoped_ptr.hpp"
 #include "containers/testable.h"
 #include "containers/testable_binary_search.h"
+#include "containers/testable_bucket_binary_search.h"
 #include "containers/testable_stl_set.h"
 #include "generators/data_generator_interface.h"
 #include "generators/data_random_generator.h"
@@ -46,6 +47,7 @@ using typelist::TypeList;
 
 const size_t kDefaultNumObjects = 1 << 20;
 const size_t kDefaultNumQueries = 1 << 20;
+const size_t kDefaultBucketSize = 500;
 const size_t kNumDimensions     = 3;
 
 const int kConstructionPrecision = 6;
@@ -59,6 +61,7 @@ const int kExitMemoryFailure = 2;
 
 size_t FLAGS_num_objects;
 size_t FLAGS_num_queries;
+size_t FLAGS_bucket_size;
 int    FLAGS_seed;
 
 namespace {
@@ -205,6 +208,9 @@ int main(int argc, char** argv) {
     ("num_queries,m",
      po::value<size_t>(&FLAGS_num_queries)->default_value(kDefaultNumQueries),
      "number of queries in tests")
+    ("bucket_size,b",
+     po::value<size_t>(&FLAGS_bucket_size)->default_value(kDefaultBucketSize),
+     "bucket size in binary search")
     ("seed,s",
      po::value<int>(&FLAGS_seed)->default_value(0),
      "seed for random generator, if zero, current time is used as seed")
@@ -228,11 +234,13 @@ int main(int argc, char** argv) {
   clog << "Seed: " << FLAGS_seed << endl;
 
   typedef Vector<kNumDimensions, double> DataType;
-  typedef TYPELIST_2(containers::TestableStlSet<DataType>,
-		     containers::TestableBinarySearch<DataType>) TList;
+  typedef TYPELIST_3(containers::TestableStlSet<DataType>,
+		     containers::TestableBinarySearch<DataType>,
+		     containers::TestableBucketBinarySearch<DataType>) TList;
   vector<InfoEntry> entries(Length<TList>::kLength);
   entries[0].method_name_ = "Stl Set";
   entries[1].method_name_ = "Stl Binary Search";
+  entries[2].method_name_ = "Bucket Binary Search";
 
   scoped_array<DataType> objects(new (std::nothrow)
 				 DataType [FLAGS_num_objects]);

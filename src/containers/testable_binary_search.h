@@ -2,9 +2,14 @@
 #define CONTAINERS_TESTABLE_BINARY_SEARCH_H_
 
 #include <algorithm>
+#include <new>
 
+#include "base/panic.h"
 #include "boost/scoped_array.hpp"
 #include "containers/testable.h"
+
+
+extern const int kExitMemoryFailure;
 
 
 namespace containers {
@@ -18,7 +23,10 @@ class TestableBinarySearch :
 
     void Assign(size_t n, const T* data) {
       n_ = n;
-      data_.reset(new T [n_]);
+      data_.reset(new (std::nothrow) T [n_]);
+      if (data_.get() == NULL)
+	panic("TestableBinarySearch: can't allocate memory, "
+	      "terminating...", kExitMemoryFailure);
       std::copy(data, data + n_, data_.get());
       std::sort(data_.get(), data_.get() + n_);
     }
